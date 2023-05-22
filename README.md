@@ -1,5 +1,4 @@
 # Hangman
-While this is TECHNICALLY my NCEA assessment,
-I'm just using it to test GitHub right now.
+While this is *technically* the code for my NCEA assessment, I'm just using it to test GitHub right now.
 
-(I definitely didn't accidentally nearly delete the entire project)
+*(I definitely didn't accidentally nearly delete the entire project in VSCode trying to make the first commit)*
