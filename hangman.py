@@ -9,39 +9,54 @@ import random
 # so I can't use error capture on it.
 
 
+def check_valid_guess():
+        """Checks whether or not user_guess is a valid guess (contains only
+        alphabetical characters)
+        
+        Returns:
+            True (bool): If user_guess is a valid guess.
+            False (bool): If user_guess is not a valid guess."""
+
+        global user_guess
+
+        if len(user_guess) == 1:
+            if not user_guess.isalpha():
+                print('\nGuess must be an alphabetical character.\n')
+                return False
+            else:
+                return True
+
+        elif len(user_guess) > 1:
+            contains_nonalphabetical = False
+            for letter in user_guess:
+                if not letter.isalpha():
+                    contains_nonalphabetical = True
+                    break
+
+        if contains_nonalphabetical:
+            print('\nGuess has impossible characters, please try again.\n'
+                '(must only contain letters)\n')
+            return False
+        else:
+            return True
+
+
 def guess_letter_or_word():
     """Gets the user's input for a letter or word guess
 
     Returns:
-        user_guess (str): The user's input for a letter or word guess
-    """
+        user_guess (str): The user's input for a letter or word guess"""
+
     global user_guess
 
-    user_guess = \
-        str(input('\nGuess a letter '
-                  '(Or the whole word if you think you know it.)\n\n'
-                  '(If the word is completely revealed, '
-                  'just enter the word.)\n\n'
-                  'Automatic game completion coming soon!\n\n'
-                  ' -- : '))
-
-    if len(user_guess) == 1:
-        if not user_guess.isalpha():
-            print('\nGuess must be an alphabetical character.\n')
-        else:
-            return user_guess
-
-    elif len(user_guess) > 1:
-        contains_nonalphabetical = False
-
-        for letter in user_guess:
-            if not letter.isalpha():
-                contains_nonalphabetical = True
-                break
-
-        if contains_nonalphabetical:
-            print('\nGuess has impossible characters, please try again.\n'
-                  '(must only contain letters)\n')
+    while not check_valid_guess():
+        user_guess = \
+            str(input('\nGuess a letter '
+                    '(Or the whole word if you think you know it.)\n\n'
+                    '(If the word is completely revealed, '
+                    'just enter the word.)\n\n'
+                    'Automatic game completion coming soon!\n\n'
+                    ' -- : '))
 
 
 def check_guess():
@@ -50,12 +65,9 @@ def check_guess():
     to see if the word has been guessed but not typed out yet.
 
     Returns:
-        None if user_guess in (but not equal to) current_word.
-
-        'Bad' if lives is less than 1.
-
-        'Good' if user_guess is equal to current_word.
-    """
+        None (none): If user_guess in (but not equal to) current_word.
+        'Bad' (str): If lives is less than 1.
+        'Good' (str): If user_guess is equal to current_word."""
 
     global lives
 
@@ -68,8 +80,6 @@ def check_guess():
         # If the guess IS the word, end the game (good ending)
         # If no, too bad! Take a life away
 
-        # TODO: Allow for spelling errors and have a
-        # 'Did you mean _____?' thing
         if user_guess == str(current_word):
             print(f'\nGood job! The word was {current_word}.\n')
             return 'Good'
@@ -151,7 +161,7 @@ ending = None
 
 # Intro text
 print('\nWelcome to Hangman!\n'
-      'This game picks from the 30,000 most common English words.\n'
+      'This game picks from around 1,200 of the most common English words.\n'
       'Not all of them are easy, so good luck!\n\n')
 
 lives = 0
