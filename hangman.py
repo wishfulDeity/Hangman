@@ -196,28 +196,3 @@ while ending is None:
 
     if ending == 'Good':
         print(f'Nice! You guessed it!! (congrats)\n\n')
-
-#######################################################################
-#
-# TODO:
-#
-# 3. Make it so that you can only enter alphabetical characters *
-#
-# 4. Tell the time that it took for the user to solve the word
-#
-# 5. Clear the terminal window on each turn to make it look cleaner
-#
-# 6. Maybe (for guesses) allow for spelling mistakes
-#    and have a "Did you mean _____?" thing
-#    (no idea how I'd implement that)
-#
-# 7. Allow the user to pick an amount of games they want the play
-#    i.e. literally just put the while loop in
-#    "for loop in range(games): while ... blah blah"
-#
-# 8. Do something like guessed letters with guessed words where
-#    it tells you if you've guessed that word before
-#
-# 9. ...
-#
-#######################################################################
