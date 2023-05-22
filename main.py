@@ -183,8 +183,6 @@ while ending is None:
                         'Automatic game completion coming soon!\n\n'
                         ' -- : '))
 
-        
-
         ending = check_guess()
 
     if ending == 'Bad':
