@@ -17,4 +17,7 @@
 - Maybe have a guessed words area 
   along with the guessed letters area in future iterations?
 
+- Add a difficulty setting where each 
+  difficulty picks from less common words
+
 - ...
