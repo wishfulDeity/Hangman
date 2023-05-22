@@ -14,4 +14,7 @@
 - Do something like guessed letters with guessed words where
   it tells you if you've guessed that word before
 
+- Maybe have a guessed words area 
+  along with the guessed letters area in future iterations?
+
 - ...

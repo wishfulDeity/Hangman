@@ -166,8 +166,6 @@ while ending is None:
         #
         # Only prints single characters, because "poleikts"
         # isn't really a 'letter', it's more a string
-        #
-        # Maybe have a guessed words area as well in future iterations?
 
         print('\nLetters that you have guessed incorrectly so far: \n')
         for character in guessed_letters:
