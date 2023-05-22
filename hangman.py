@@ -13,7 +13,7 @@ def guess_letter_or_word():
     """Gets the user's input for a letter or word guess
 
     Returns:
-        name (type): _description_
+        user_guess (str): The user's input for a letter or word guess
     """
     global user_guess
 
