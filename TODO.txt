@@ -1,0 +1,12 @@
+- Make it so that you can only enter alphabetical characters *
+- Tell the time that it took for the user to solve the word
+- Clear the terminal window on each turn to make it look cleaner
+- Maybe (for guesses) allow for spelling mistakes
+  and have a "Did you mean _____?" thing
+  (no idea how I'd implement that)
+- Allow the user to pick an amount of games they want the play
+  i.e. literally just put the while loop in
+  "for loop in range(games): while ... blah blah"
+- Do something like guessed letters with guessed words where
+  it tells you if you've guessed that word before
+- ...
