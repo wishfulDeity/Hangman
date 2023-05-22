@@ -1,5 +1,4 @@
-# 21 Jack Segar-Farquharson
-# Programming Assessment AS91896 Version 1
+# Programming Assessment AS91896 Version 2
 import random
 
 # I was gonna use os.system('clear') to clear the terminal each turn
