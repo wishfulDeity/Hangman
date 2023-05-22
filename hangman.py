@@ -18,12 +18,12 @@ def guess_letter_or_word():
     global user_guess
 
     user_guess = \
-            str(input('\nGuess a letter '
-                      '(Or the whole word if you think you know it.)\n\n'
-                      '(If the word is completely revealed, '
-                      'just enter the word.)\n\n'
-                      'Automatic game completion coming soon!\n\n'
-                      ' -- : '))
+        str(input('\nGuess a letter '
+                  '(Or the whole word if you think you know it.)\n\n'
+                  '(If the word is completely revealed, '
+                  'just enter the word.)\n\n'
+                  'Automatic game completion coming soon!\n\n'
+                  ' -- : '))
 
     if len(user_guess) == 1:
         if not user_guess.isalpha():
@@ -120,9 +120,9 @@ def ask_lives():
     while lives == 0:
         try:
             user_lives = input('How many lives do you want?\n'
-                            '(Enter nothing to generate it automatically '
-                            'based on the length of the word) \n\n'
-                            ' -- : ')
+                               '(Enter nothing to generate it automatically '
+                               'based on the length of the word) \n\n'
+                               ' -- : ')
 
             if user_lives == 0 or user_lives == '':
                 return len(current_word)
