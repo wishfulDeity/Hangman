@@ -9,7 +9,7 @@ import random
 # so I can't use error capture on it.
 
 
-def check_valid_guess():
+def is_guess_valid():
         """Checks whether or not user_guess is a valid guess (contains only
         alphabetical characters)
         
@@ -49,7 +49,7 @@ def guess_letter_or_word():
 
     global user_guess
 
-    while not check_valid_guess():
+    while not is_guess_valid():
         user_guess = \
             str(input('\nGuess a letter '
                     '(Or the whole word if you think you know it.)\n\n'
