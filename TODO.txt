@@ -1,5 +1,8 @@
+IN PROGRESS[
 - Make it so that you can only enter alphabetical characters
+]
 
+TODO[
 - Tell the time that it took for the user to solve the word
 
 - Clear the terminal window on each turn to make it look cleaner
@@ -21,3 +24,4 @@
   difficulty picks from less common words
 
 - ...
+]
