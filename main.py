@@ -1,5 +1,6 @@
 # Programming Assessment AS91896 Version 2
 import random
+import math
 
 # I was gonna use os.system('clear') to clear the terminal each turn
 # But the 'clear' command is GNU/Linux only
@@ -114,7 +115,7 @@ def ask_lives():
                                ' -- : ')
 
             if user_lives == 0 or user_lives == '':
-                return len(current_word)
+                return math.ceil(len(current_word) * 1.5)
 
             elif int(user_lives) > 0:
                 return int(user_lives)
@@ -124,7 +125,7 @@ def ask_lives():
             continue
 
 
-user_guess = ''
+user_guess = None
 
 words = []
 guessed_letters = []
@@ -174,14 +175,15 @@ while ending is None:
                 print(character, end=' ')
         print()
 
-        while not is_guess_valid():
-            user_guess = \
-                str(input('\nGuess a letter '
-                          '(Or the whole word if you think you know it.)\n\n'
-                          '(If the word is completely revealed, '
-                          'just enter the word.)\n\n'
-                          'Automatic game completion coming soon!\n\n'
-                          ' -- : '))
+        user_guess \
+            = str(input('\nGuess a letter '
+                        '(Or the whole word if you think you know it.)\n\n'
+                        '(If the word is completely revealed, '
+                        'just enter the word.)\n\n'
+                        'Automatic game completion coming soon!\n\n'
+                        ' -- : '))
+
+        
 
         ending = check_guess()
 
