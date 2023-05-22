@@ -1,4 +1,4 @@
-- Make it so that you can only enter alphabetical characters *
+- Make it so that you can only enter alphabetical characters
 - Tell the time that it took for the user to solve the word
 - Clear the terminal window on each turn to make it look cleaner
 - Maybe (for guesses) allow for spelling mistakes
