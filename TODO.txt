@@ -1,8 +1,4 @@
-IN PROGRESS[
-- Make it so that you can only enter alphabetical characters
-]
-
-TODO[
+TODO
 - Tell the time that it took for the user to solve the word
 
 - Clear the terminal window on each turn to make it look cleaner
@@ -12,17 +8,16 @@ TODO[
 
 - Allow the user to pick an amount of games they want the play
   i.e. literally just put the while loop in
-  "for loop in range(games): 
-       while ... blah blah"
+  "for loop in range(games): while ... blah blah"
 
 - Do something like guessed letters with guessed words where
   it tells you if you've guessed that word before
 
-- Maybe have a guessed words area 
-  along with the guessed letters area in future iterations?
+- Have a 'guessed words' area as well as the 'guessed letters area
 
 - Add a difficulty setting where each 
   difficulty picks from less common words
 
 - ...
-]
+
+DONE
