@@ -11,13 +11,15 @@ import math
 
 def check_guess():
     """Gets the current guess and checks if it's in the word.
+
     Also compares the 'guessed_letters' list to 'current_word'
     to see if the word has been guessed but not typed out yet.
 
     Returns:
-        None (none): If user_guess in (but not equal to) current_word.
-        'Bad' (str): If lives is less than 1.
-        'Good' (str): If user_guess is equal to current_word."""
+        None (NoneType): if user_guess is in current_word
+        Bad (str): if lives is less than 1
+        Good (str): if user_guess is equal to current_word
+    """
 
     global lives
 
@@ -28,7 +30,7 @@ def check_guess():
         #
         # If yes, cool!
         # If the guess IS the word, end the game (good ending)
-        # If no, too bad! Take a life away
+        # If no, too bad! Take a life away 
 
         if user_guess == str(current_word):
             print(f'\nGood job! The word was {current_word}.\n')
@@ -68,8 +70,8 @@ def ask_lives():
     """Get the amount of lives that the user wants.
 
     Returns:
-        user_lives if user_lives is greater than 0.
-        len(current_word) if user_lives is empty (equal to '').
+        user_lives (int): if user_lives is greater than 0
+        len(current_word) (int):  if user_lives is empty (equal to '')
     """
 
     global lives
@@ -94,24 +96,20 @@ def ask_lives():
             continue
 
 
-def how_many_games():
-    """Ask the player how many games of Hangman they want to play
+def hidden_print(string, list):
+    """Print the word that the user has to guess in a way that they can't see 
+    (underscores where unguessed letters are)
+    
+    Args:
+        string (str): The word being printed
+        list (list): The list of letters to print (have not be underscored)"""
 
-    Returns:
-        games_to_play (int): The amount of games that the player wants to play
-    """
-    valid = False
-    while not valid:
-        try:
-            games_to_play \
-                = int(input('\nHow many games do you want to play?\n'
-                            ' -- : '))
-            valid = True
-            return games_to_play
-
-        except ValueError:
-            print('\nPlease enter a number.\n')
-            valid = False
+    for character in string:
+        if character in list:
+            print(character, end=' ')
+        else:
+            print("_", end=' ')
+    print()
 
 
 user_guess = None
@@ -137,51 +135,38 @@ print('\nWelcome to Hangman!\n'
 
 lives = 0
 lives = ask_lives()
-
-amount_of_games = how_many_games()
-
-lives *= amount_of_games
-
 # Game loop
-for game in range(amount_of_games):
-    while ending is None:
-        if lives >= 1:
-            print(f'You have {lives} lives remaining.\n')
+while ending is None:
+    if lives >= 1:
+        print(f'You have {lives} lives remaining.\n')
 
-            # Print the word that the user has to guess in a way that
-            # they can't see (underscores where unguessed letters are)
-            for letter in current_word:
-                if letter in guessed_letters:
-                    print(letter, end=' ')
-                else:
-                    print("_", end=' ')
-            print()
+        hidden_print(current_word, guessed_letters)
 
-            # Print the letters that the user has guessed so far.
-            #
-            # Only prints single characters, because "poleikts"
-            # isn't really a 'letter', it's more a string
+        # Print the letters that the user has guessed so far.
+        #
+        # Only prints single characters, because "poleikts"
+        # isn't really a 'letter', it's more a string
 
-            print('\nLetters that you have guessed incorrectly so far: \n')
-            for character in guessed_letters:
-                if len(character) == 1 \
-                        and character not in current_word:
-                    print(character, end=' ')
-            print()
+        print('\nLetters that you have guessed incorrectly so far: \n')
+        for character in guessed_letters:
+            if len(character) == 1 \
+                    and character not in current_word:
+                print(character, end=' ')
+        print()
 
-            user_guess \
-                = str(input('\nGuess a letter '
-                            '(Or the whole word if you think you know it.)\n\n'
-                            '(If the word is completely revealed, '
-                            'just enter the word.)\n\n'
-                            'Automatic game completion coming soon!\n\n'
-                            ' -- : '))
+        user_guess \
+            = str(input('\nGuess a letter '
+                        '(Or the whole word if you think you know it.)\n\n'
+                        '(If the word is completely revealed, '
+                        'just enter the word.)\n\n'
+                        'Automatic game completion coming soon!\n\n'
+                        ' -- : '))
 
-            ending = check_guess()
+        ending = check_guess()
 
-        if ending == 'Bad':
-            print('You couldn\'t guess the word!')
-            print(f'The word was \'{current_word}\'\n\n')
+    if ending == 'Bad':
+        print('You couldn\'t guess the word!')
+        print(f'The word was \'{current_word}\'\n\n')
 
-        if ending == 'Good':
-            print(f'Nice! You guessed it!! (congrats)\n\n')
+    if ending == 'Good':
+        print(f'Nice! You guessed it!! (congrats)\n\n')
