@@ -9,6 +9,7 @@ import math
 # Using the wrong command doesn't even throw an exception
 # so I can't use error capture on it.
 
+
 def check_guess():
     """Gets the current guess and checks if it's in the word.
 
@@ -16,7 +17,6 @@ def check_guess():
     to see if the word has been guessed but not typed out yet.
 
     Returns:
-        None (NoneType): if user_guess is in current_word
         Bad (str): if lives is less than 1
         Good (str): if user_guess is equal to current_word
     """
@@ -30,7 +30,7 @@ def check_guess():
         #
         # If yes, cool!
         # If the guess IS the word, end the game (good ending)
-        # If no, too bad! Take a life away 
+        # If no, too bad! Take a life away
 
         if user_guess == str(current_word):
             print(f'\nGood job! The word was {current_word}.\n')
@@ -39,13 +39,11 @@ def check_guess():
         elif user_guess in current_word:
             if len(user_guess) == 1:
                 print(f'\nNice! {user_guess} is in the word!\n')
-                return None
 
             else:
                 print(f'\n\'{user_guess}\' is in the word, but it\'s not '
                       'the whole word.')
                 print('Please try again.')
-                return None
 
         if user_guess not in current_word:
             if len(user_guess) == 1:
@@ -53,15 +51,14 @@ def check_guess():
                 lives -= 1
             else:
                 print(f'Nope, \'{user_guess}\' isn\'t the word, try again.')
-                return None
 
             if lives < 1:
                 return 'Bad'
-            else:
-                return None
+
+        if user_guess is None:
+            pass
     else:
         print('\nYou have already guessed that, please try again.\n')
-        return None
 
     print()
 
@@ -97,19 +94,55 @@ def ask_lives():
 
 
 def hidden_print(string, list):
-    """Print the word that the user has to guess in a way that they can't see 
+    """Print the word that the user has to guess in a way that they can't see
     (underscores where unguessed letters are)
-    
+
+    Also checks if the string is fully revealed,
+    and changes the 'ending' variable accordingly
+
     Args:
         string (str): The word being printed
-        list (list): The list of letters to print (have not be underscored)"""
+        list (list): The list of letters to print (make not underscored)"""
 
+    global reveal_count  # <- I hate this so much, TODO: fix this
+    global ending
+
+    # Loop through the string and print the character
+    # if it that character shows up in the list
     for character in string:
         if character in list:
             print(character, end=' ')
         else:
             print("_", end=' ')
+
+    if user_guess is not None:
+        reveal_count += string.count(user_guess)
+
+        # Debug prints vv
+        # print(f'\nreveal_count: {reveal_count}')
+        # print(f'len(string): {len(string)}')
+
     print()
+
+
+def word_length():
+    """Gets the length of the word that the user wants to guess
+
+    Returns:
+        length_wanted (int): Length of the word that the user wants to guess
+    """
+    valid = False
+    while not valid:
+        length_wanted = \
+            int(input('\nHow long would you like the word you\'re  '
+                      'guessing to be?\n'
+                      ' -- : '))
+        if length_wanted >= 4:
+            valid = True
+            return length_wanted
+        elif length_wanted < 4:
+            print('\nThis game has no words shorter than 4 characters\n')
+            continue
 
 
 user_guess = None
@@ -119,13 +152,23 @@ guessed_letters = []
 
 with open('words.txt') as f:
     for line in f:
-        if len(line) > 1:
-            words.append(line.strip())
+        words.append(line.strip())
+
+word_length = None
+# word_length = word_length()  # Incredible naming, I know
+
+# Go thru list and delete every word that isn't the length wanted
+if word_length is not None:
+    for index in range(0, words):
+        if len(words) != word_length:
+            del words[index]
 
 # TODO: Let the user pick a length of word to guess.
 current_word = random.choice(words)
+current_word = 'test'  # Just for testing
 
-# current_word = 'test'  # Just for testing
+reveal_count = 0  # Making this global hurts me
+
 ending = None
 
 # Intro text
@@ -135,6 +178,7 @@ print('\nWelcome to Hangman!\n'
 
 lives = 0
 lives = ask_lives()
+
 # Game loop
 while ending is None:
     if lives >= 1:
@@ -142,11 +186,14 @@ while ending is None:
 
         hidden_print(current_word, guessed_letters)
 
+        if reveal_count == len(current_word):
+            ending = 'Good'
+            break
+
         # Print the letters that the user has guessed so far.
         #
-        # Only prints single characters, because "poleikts"
-        # isn't really a 'letter', it's more a string
-
+        # Only prints single characters,
+        # because "lopekmi" isn't really a 'letter', it's more a string
         print('\nLetters that you have guessed incorrectly so far: \n')
         for character in guessed_letters:
             if len(character) == 1 \
@@ -157,16 +204,16 @@ while ending is None:
         user_guess \
             = str(input('\nGuess a letter '
                         '(Or the whole word if you think you know it.)\n\n'
-                        '(If the word is completely revealed, '
-                        'just enter the word.)\n\n'
-                        'Automatic game completion coming soon!\n\n'
                         ' -- : '))
 
         ending = check_guess()
 
-    if ending == 'Bad':
-        print('You couldn\'t guess the word!')
-        print(f'The word was \'{current_word}\'\n\n')
+        if ending is not None:
+            break
 
-    if ending == 'Good':
-        print(f'Nice! You guessed it!! (congrats)\n\n')
+if ending == 'Bad':
+    print('You couldn\'t guess the word!')
+    print(f'The word was \'{current_word}\'\n\n')
+
+if ending == 'Good':
+    print(f'Nice! You guessed it!! (congrats)\n\n')

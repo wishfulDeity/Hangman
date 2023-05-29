@@ -18,6 +18,6 @@ TODO
 - Add a difficulty setting where each 
   difficulty picks from less common words
 
-- ...
+- End the game if the word has been revealed fully
 
 DONE
