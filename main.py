@@ -165,7 +165,7 @@ if word_length is not None:
 
 # TODO: Let the user pick a length of word to guess.
 current_word = random.choice(words)
-current_word = 'test'  # Just for testing
+# current_word = 'test'  # Just for testing
 
 reveal_count = 0  # Making this global hurts me
 
