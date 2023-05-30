@@ -26,12 +26,12 @@ def check_guess():
         # If no, too bad! Take a life away
 
         if user_guess == str(current_word):
-            print(f'\nGood job! The word was {current_word}.\n')
+            print(f'\nGood job! The word was {current_word}.')
             return 'Good'
 
         elif user_guess in current_word:
             if len(user_guess) == 1:
-                print(f'\nNice! {user_guess} is in the word!\n')
+                print(f'\nNice! {user_guess} is in the word!')
 
             else:
                 print(f'\n\'{user_guess}\' is in the word, but it\'s not '
@@ -40,7 +40,7 @@ def check_guess():
 
         if user_guess not in current_word:
             if len(user_guess) == 1:
-                print(f'\nUnlucky! \'{user_guess}\' isn\'t in the word.\n')
+                print(f'\nUnlucky! \'{user_guess}\' isn\'t in the word.')
                 lives -= 1
             else:
                 print(f'Nope, \'{user_guess}\' isn\'t the word, try again.')
@@ -51,7 +51,7 @@ def check_guess():
         if user_guess is None:  # <-- Unneeded? Maybe.
             pass
     else:
-        print('\nYou have already guessed that, please try again.\n')
+        print('\nYou have already guessed that, please try again.')
 
     print()
 
@@ -120,6 +120,8 @@ def hidden_print(string, list):
 
 
 user_guess = None
+reveal_count = 0  # Making this global hurts me
+ending = None
 
 words = []
 guessed_things = []
@@ -132,17 +134,13 @@ with open('words.txt') as f:
 current_word = random.choice(words).upper()
 # current_word = 'fhqwhgads'.upper()  # Just for testing
 
-reveal_count = 0  # Making this global hurts me
-
-ending = None
-
 print('\n' * 128)
 
 # Intro text
 print('\nPlease make your terminal window full screen (you\'ll need it)\n\n'
       'Welcome to Hangman!\n'
-      'This game picks from around 1,200 of the most common English words.\n'
-      'Not all of them are easy, so good luck!\n\n')
+      'This game picks from around 1,500 of the most common English words.\n'
+      'Just pray that you don\'t get the hardest word in hangman...\n\n')
 
 lives = 0
 lives = ask_lives()
@@ -190,8 +188,11 @@ while ending is None:
 print('\n' * 128)
 
 if ending == 'Bad':
+    if current_word == "FHQWHGADS":
+        print('Oops! You got the hardest word... sorry?')
+
     print('You couldn\'t guess the word!')
-    print(f'The word was \'{current_word}\'\n')
+    print(f'The word was \'{current_word}\'')
 
 if ending == 'Good':
-    print(f'Nice! You guessed it!! (congrats)\n')
+    print(f'Nice! You guessed it!! (congrats)')
