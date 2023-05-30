@@ -23,8 +23,8 @@ def check_guess():
 
     global lives
 
-    if user_guess not in guessed_letters:
-        guessed_letters.append(user_guess)
+    if user_guess not in guessed_things:
+        guessed_things.append(user_guess)
 
         # Check whether or not the guess is in the word.
         #
@@ -104,8 +104,8 @@ def hidden_print(string, list):
         string (str): The word being printed
         list (list): The list of letters to print (make not underscored)"""
 
-    global reveal_count  # <- I hate this so much, TODO: fix this
-    global ending
+    global reveal_count  # <-- I hate this so much, TODO: Localise this
+    global ending  # <-- This is fine tho
 
     # Loop through the string and print the character
     # if it that character shows up in the list
@@ -119,8 +119,8 @@ def hidden_print(string, list):
         reveal_count += string.count(user_guess)
 
         # Debug prints vv
-        # print(f'\nreveal_count: {reveal_count}')
-        # print(f'len(string): {len(string)}')
+        print(f'\nreveal_count: {reveal_count}')
+        print(f'len(string): {len(string)}')
 
     print()
 
@@ -148,7 +148,7 @@ def word_length():
 user_guess = None
 
 words = []
-guessed_letters = []
+guessed_things = []
 
 with open('words.txt') as f:
     for line in f:
@@ -164,7 +164,7 @@ if word_length is not None:
             del words[index]
 
 # TODO: Let the user pick a length of word to guess.
-current_word = random.choice(words)
+current_word = random.choice(words).upper()
 # current_word = 'test'  # Just for testing
 
 reveal_count = 0  # Making this global hurts me
@@ -172,39 +172,48 @@ reveal_count = 0  # Making this global hurts me
 ending = None
 
 # Intro text
-print('\nWelcome to Hangman!\n'
+print('\nPlease make your terminal window full screen (you\'ll need it)\n\n'
+      'Welcome to Hangman!\n'
       'This game picks from around 1,200 of the most common English words.\n'
       'Not all of them are easy, so good luck!\n\n')
 
 lives = 0
 lives = ask_lives()
+print('\n' * 128)
 
 # Game loop
 while ending is None:
     if lives >= 1:
         print(f'You have {lives} lives remaining.\n')
 
-        hidden_print(current_word, guessed_letters)
+        hidden_print(current_word, guessed_things)
 
         if reveal_count == len(current_word):
             ending = 'Good'
             break
 
-        # Print the letters that the user has guessed so far.
-        #
-        # Only prints single characters,
-        # because "lopekmi" isn't really a 'letter', it's more a string
+        # Print letters guessed so far
         print('\nLetters that you have guessed incorrectly so far: \n')
-        for character in guessed_letters:
+        for character in guessed_things:
             if len(character) == 1 \
                     and character not in current_word:
                 print(character, end=' ')
         print()
 
+        # Print words guessed so far
+        print('\nWords that you have guessed so far: \n')
+        for word in guessed_things:
+            if len(word) > 1 \
+                    and word is not current_word:
+                print(word, end=' ')
+        print()
+
         user_guess \
             = str(input('\nGuess a letter '
                         '(Or the whole word if you think you know it.)\n\n'
-                        ' -- : '))
+                        ' -- : ')).upper()
+
+        print('\n' * 128)
 
         ending = check_guess()
 
