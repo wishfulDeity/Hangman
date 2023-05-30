@@ -130,7 +130,7 @@ with open('words.txt') as f:
 
 
 current_word = random.choice(words).upper()
-current_word = 'fhqwhgads'.upper()  # Just for testing
+# current_word = 'fhqwhgads'.upper()  # Just for testing
 
 reveal_count = 0  # Making this global hurts me
 
