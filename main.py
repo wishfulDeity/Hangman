@@ -2,13 +2,6 @@
 import random
 import math
 
-# I was gonna use os.system('clear') to clear the terminal each turn
-# But the 'clear' command is GNU/Linux only
-# so I'll just use print('/n' * 128) or something in v2
-#
-# Using the wrong command doesn't even throw an exception
-# so I can't use error capture on it.
-
 
 def check_guess():
     """Gets the current guess and checks if it's in the word.
@@ -55,7 +48,7 @@ def check_guess():
             if lives < 1:
                 return 'Bad'
 
-        if user_guess is None:
+        if user_guess is None:  # <-- Unneeded? Maybe.
             pass
     else:
         print('\nYou have already guessed that, please try again.\n')
@@ -73,7 +66,8 @@ def ask_lives():
 
     global lives
 
-    start = input('Press ENTER to play\n')
+    input('Press ENTER to play\n')
+    print('\n' * 128)
 
     while lives == 0:
         try:
@@ -104,7 +98,7 @@ def hidden_print(string, list):
         string (str): The word being printed
         list (list): The list of letters to print (make not underscored)"""
 
-    global reveal_count  # <-- I hate this so much, TODO: Localise this
+    global reveal_count  # <-- I hate this so much, make this local.
     global ending  # <-- This is fine tho
 
     # Loop through the string and print the character
@@ -118,31 +112,11 @@ def hidden_print(string, list):
     if user_guess is not None:
         reveal_count += string.count(user_guess)
 
-        # Debug prints vv
-        print(f'\nreveal_count: {reveal_count}')
-        print(f'len(string): {len(string)}')
+    # Debug prints vv
+    print(f'\nLetters found: {reveal_count}')
+    print(f'Word length: {len(string)}')
 
     print()
-
-
-def word_length():
-    """Gets the length of the word that the user wants to guess
-
-    Returns:
-        length_wanted (int): Length of the word that the user wants to guess
-    """
-    valid = False
-    while not valid:
-        length_wanted = \
-            int(input('\nHow long would you like the word you\'re  '
-                      'guessing to be?\n'
-                      ' -- : '))
-        if length_wanted >= 4:
-            valid = True
-            return length_wanted
-        elif length_wanted < 4:
-            print('\nThis game has no words shorter than 4 characters\n')
-            continue
 
 
 user_guess = None
@@ -154,22 +128,15 @@ with open('words.txt') as f:
     for line in f:
         words.append(line.strip())
 
-word_length = None
-# word_length = word_length()  # Incredible naming, I know
 
-# Go thru list and delete every word that isn't the length wanted
-if word_length is not None:
-    for index in range(0, words):
-        if len(words) != word_length:
-            del words[index]
-
-# TODO: Let the user pick a length of word to guess.
 current_word = random.choice(words).upper()
-# current_word = 'test'  # Just for testing
+current_word = 'fhqwhgads'.upper()  # Just for testing
 
 reveal_count = 0  # Making this global hurts me
 
 ending = None
+
+print('\n' * 128)
 
 # Intro text
 print('\nPlease make your terminal window full screen (you\'ll need it)\n\n'
@@ -220,9 +187,11 @@ while ending is None:
         if ending is not None:
             break
 
+print('\n' * 128)
+
 if ending == 'Bad':
     print('You couldn\'t guess the word!')
-    print(f'The word was \'{current_word}\'\n\n')
+    print(f'The word was \'{current_word}\'\n')
 
 if ending == 'Good':
-    print(f'Nice! You guessed it!! (congrats)\n\n')
+    print(f'Nice! You guessed it!! (congrats)\n')
