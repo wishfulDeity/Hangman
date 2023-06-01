@@ -61,7 +61,7 @@ def ask_lives():
 
     Returns:
         user_lives (int): if user_lives is greater than 0
-        len(current_word) (int):  if user_lives is empty (equal to '')
+        math.ciel(len(current_word) * 1.5) (int): if user_lives is empty
     """
 
     global lives
@@ -92,14 +92,14 @@ def hidden_print(string, list):
     (underscores where unguessed letters are)
 
     Also checks if the string is fully revealed,
-    and changes the 'ending' variable accordingly
+    and changes the 'ending' variable to 'Good' if it is.
 
     Args:
         string (str): The word being printed
         list (list): The list of letters to print (make not underscored)"""
 
     global reveal_count  # <-- I hate this so much, make this local.
-    global ending  # <-- This is fine tho
+    global ending
 
     # Loop through the string and print the character
     # if it that character shows up in the list
@@ -192,7 +192,8 @@ if ending == 'Bad':
         print('Oops! You got the hardest word... sorry?')
 
     print('You couldn\'t guess the word!')
-    print(f'The word was \'{current_word}\'')
 
 if ending == 'Good':
     print(f'Nice! You guessed it!! (congrats)')
+
+print(f'The word was \'{current_word}\'')

@@ -13,11 +13,10 @@ TODO
 - Do something like guessed letters with guessed words where
   it tells you if you've guessed that word before
 
-- Have a 'guessed words' area as well as the 'guessed letters area
-
 - Add a difficulty setting where each 
   difficulty picks from less common words
 
 DONE
-
   - End the game if the word has been revealed fully
+
+  - Have a 'guessed words' area as well as the 'guessed letters area
