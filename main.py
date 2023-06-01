@@ -60,8 +60,9 @@ def ask_lives():
     """Get the amount of lives that the user wants.
 
     Returns:
-        user_lives (int): if user_lives is greater than 0
+        user_lives (int): if user_lives is greater than 0 and an int
         math.ciel(len(current_word) * 1.5) (int): if user_lives is empty
+        math.ciel(float(user_lives) (int): if user_lives > 0 and a float
     """
 
     global lives
@@ -81,6 +82,9 @@ def ask_lives():
 
             elif int(user_lives) > 0:
                 return int(user_lives)
+
+            elif float(user_lives) > 0:
+                return math.ceil(user_lives)
 
         except ValueError:
             print('\nPlease enter a number.\n')
