@@ -1,20 +1,20 @@
 TODO
-- Tell the time that it took for the user to solve the word
+  - Tell the time that it took for the user to solve the word
 
-- Clear the terminal window on each turn to make it look cleaner
+  - Clear the terminal window on each turn to make it look cleaner
 
-- Allow for spelling mistakes in guesses and have a 
-  "Did you mean _____?" thing (no idea how I'd implement that)
+  - Allow for spelling mistakes in guesses and have a 
+    "Did you mean _____?" thing (no idea how I'd implement that)
 
-- Allow the user to pick an amount of games they want the play
-  i.e. literally just put the while loop in
-  "for loop in range(games): while ... blah blah"
+  - Allow the user to pick an amount of games they want the play
+    i.e. literally just put the while loop in
+    "for loop in range(games): while ... blah blah"
 
-- Do something like guessed letters with guessed words where
-  it tells you if you've guessed that word before
+  - Do something like guessed letters with guessed words where
+    it tells you if you've guessed that word before
 
-- Add a difficulty setting where each 
-  difficulty picks from less common words
+  - Add a difficulty setting where each 
+    difficulty picks from less common words
 
 DONE
   - End the game if the word has been revealed fully

@@ -100,7 +100,7 @@ def hidden_print(string, list):
 
     Args:
         string (str): The word being printed
-        list (list): The list of letters to print (make not underscored)"""
+        list (list): The list of letters to print (not underscored)"""
 
     global reveal_count  # <-- I hate this so much, make this local.
     global ending
@@ -134,7 +134,6 @@ with open('words.txt') as f:
     for line in f:
         words.append(line.strip())
 
-
 current_word = random.choice(words).upper()
 # current_word = 'fhqwhgads'.upper()  # Just for testing
 
@@ -161,7 +160,7 @@ while ending is None:
             ending = 'Good'
             break
 
-        # Print letters guessed so far
+        # Print LETTERS guessed so far
         print('\nLetters that you have guessed incorrectly so far: \n')
         for character in guessed_things:
             if len(character) == 1 \
@@ -169,7 +168,7 @@ while ending is None:
                 print(character, end=' ')
         print()
 
-        # Print words guessed so far
+        # Print WORDS guessed so far
         print('\nWords that you have guessed so far: \n')
         for word in guessed_things:
             if len(word) > 1 \
